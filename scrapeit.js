@@ -16,8 +16,9 @@ function isURL(s) {
 
 function grabAndTransform(url) {
   if (!isURL(url)) {
-    console.log(`the clipboard currently contains ${url}`);
-    console.log('this is not a valid url');
+    console.error('===');
+    console.error('=== Error: the clipboard does not contain a valid url');
+    console.error('===');
     return;
   }
   request(url, function(err, resp, body){
@@ -51,6 +52,10 @@ function grabAndTransform(url) {
 
 // "main"
 ncp.paste((err, url) => {
+  console.log('Clipboard contains:');
   console.log(url);
+  console.log('');
+  console.log('Preparing to scrape and convert');
+  console.log('');
   grabAndTransform(url);
 });

@@ -31,12 +31,14 @@ function grabAndTransform(url) {
       const removeRelativeUrlRoot = /web\/\d*\//g;
       const removePortAndWiki = /\:80\/wiki/g;
       const removeSideBar = /{\|[\s\S]*?\|}/g;
+      const removeYaleWikiRoot = /http:\/\/www.yalewiki.org\//g;
 
       result = result.replace(removeTags, '');
       result = result.replace(removeAbsoluteUrlRoot, '');
       result = result.replace(removeRelativeUrlRoot, '');
       result = result.replace(removePortAndWiki, '');
       result = result.replace(removeSideBar, '');
+      result = result.replace(removeYaleWikiRoot, '');
       result = `{{plshelp}}\n\n${result}`;
 
       // fs.writeFile("output.mw", result);

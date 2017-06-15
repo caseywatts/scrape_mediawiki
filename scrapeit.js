@@ -7,7 +7,23 @@ const ncp = require("copy-paste");
 // https://web.archive.org/web/20130817032836/http://www.yalewiki.org:80/wiki/Late-night_food
 // const url = "https://web.archive.org/web/20130817032836/http://www.yalewiki.org:80/wiki/Late-night_food";
 
+// from https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+function isURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return pattern.test(str);
+}
+
 function grabAndTransform(url) {
+  if (!isURL(url)) {
+    console.log(`the clipboard currently contains ${url}`);
+    console.log('this is not a valid url');
+    return;
+  }
   request(url, function(err, resp, body){
     $ = cheerio.load(body);
     $('#toc').remove();

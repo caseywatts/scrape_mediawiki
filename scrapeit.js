@@ -17,11 +17,14 @@ function grabAndTransform(url) {
       const removeAbsoluteUrlRoot = /https:\/\/web.archive.org\/web\/\d*\//g;
       const removeRelativeUrlRoot = /web\/\d*\//g;
       const removePortAndWiki = /\:80\/wiki/g;
+      const removeSideBar = /{\|[\s\S]*?\|}/g;
 
       result = result.replace(removeTags, '');
       result = result.replace(removeAbsoluteUrlRoot, '');
       result = result.replace(removeRelativeUrlRoot, '');
       result = result.replace(removePortAndWiki, '');
+      result = result.replace(removeSideBar, '');
+      result = `{{plshelp}}\n\n${result}`;
 
       // fs.writeFile("output.mw", result);
       // console.log(`outputted ${'output.mw'}`);

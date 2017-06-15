@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const pdc = require('pdc');
 const fs = require('fs');
 const ncp = require("copy-paste");
+const say = require('say');
 
 // https://web.archive.org/web/20130817032836/http://www.yalewiki.org:80/wiki/Late-night_food
 // const url = "https://web.archive.org/web/20130817032836/http://www.yalewiki.org:80/wiki/Late-night_food";
@@ -47,6 +48,7 @@ function grabAndTransform(url) {
 
       ncp.copy(result, function() {
         console.log('copied into clipboard');
+        say.speak('ready');
       });
     });
   });
